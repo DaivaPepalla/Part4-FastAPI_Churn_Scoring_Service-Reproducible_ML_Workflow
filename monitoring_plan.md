@@ -4,7 +4,7 @@ Once this FastAPI microservice is deployed to production, a continuous monitorin
 
 ---
 
-## 📈 Post-Deployment Monitoring Plan
+##  Post-Deployment Monitoring Plan
 
 ### 1. Model & Data Drift Tracking
 * **Data Drift:** Monitor incoming inference features (e.g., `recency`, `support_complaints`) against the training baseline distributions using metrics like **Population Stability Index (PSI)** or the **Kolmogorov-Smirnov test**. Significant shifts indicate changing customer behavior patterns.
@@ -26,16 +26,16 @@ Schedule a pipeline recalculation event if any of the following boundaries are c
 
 ---
 
-## ⚖️ Responsible Use Guidelines for the Retention Team
+##  Responsible Use Guidelines for the Retention Team
 
 To ensure ethical, fair, and high-ROI operational deployment, the business consulting and retention teams must adhere to the following usage guidelines:
 
-### ✅ How the API Output SHOULD Be Used
+###  How the API Output SHOULD Be Used
 * **Proactive Outreach:** Use high-probability flags to prioritize customer success check-ins, offering personalized engagement audits, feature education, or value optimization.
 * **Loyalty Incentives:** Direct marketing budgets toward high-value, high-risk profiles by extending tailored loyalty rewards, service discounts, or early renewal options.
 * **Systemic Friction Resolution:** Look at aggregated batch prediction risk explanations to identify systemic product bottlenecks (e.g., if many accounts show risk due to "high support complaints," flag that product module to the engineering team).
 
-### ❌ How the API Output SHOULD NOT Be Used
+###  How the API Output SHOULD NOT Be Used
 * **Punitive Pricing or Penalties:** Do not use high churn risk predictions to prematurely penalize customers, raise subscription fees, restrict account features, or implement aggressive contractual lock-ins.
 * **Automated Account Termination:** The model must never be used to automatically offboard or deprioritize accounts without human-in-the-loop validation from an account manager.
 * **Bias and Discrimination:** Ensure intervention workflows do not create systematic disparities across demographic segments or regions not explicitly designed into the behavioral feature matrix.
