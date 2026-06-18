@@ -5,12 +5,14 @@ from fastapi.testclient import TestClient
 from sklearn.datasets import make_classification
 from sklearn.ensemble import RandomForestClassifier
 
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MODEL_PATH = os.path.join(ROOT_DIR, "model.pkl")
 # Setup automated dummy model fallback if script runs standalone
-if not os.path.exists("./model.pkl"):
+if not os.path.exists(MODEL_PATH):
     print("🔧 Generating dummy testing model configuration file...")
     X, y = make_classification(n_samples=20, n_features=5, random_state=42)
     dummy_model = RandomForestClassifier(random_state=42).fit(X, y)
-    with open("./model.pkl", "wb") as f:
+    with open(MODEL_PATH, "wb") as f:
         pickle.dump({"model": dummy_model, "scaler": None}, f)
 
 from app.main import app
