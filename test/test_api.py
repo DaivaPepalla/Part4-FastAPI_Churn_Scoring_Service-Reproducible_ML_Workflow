@@ -9,7 +9,7 @@ ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MODEL_PATH = os.path.join(ROOT_DIR, "model.pkl")
 # Setup automated dummy model fallback if script runs standalone
 if not os.path.exists(MODEL_PATH):
-    print("🔧 Generating dummy testing model configuration file...")
+    print(" Generating dummy testing model configuration file...")
     X, y = make_classification(n_samples=20, n_features=5, random_state=42)
     dummy_model = RandomForestClassifier(random_state=42).fit(X, y)
     with open(MODEL_PATH, "wb") as f:
@@ -20,14 +20,14 @@ from app.main import app
 client = TestClient(app)
 
 def test_01_health_endpoint():
-    """Verify health systems state parameters read correctly."""
+    #Check if health systems state parameters read correctly
     response = client.get("/health")
     assert response.status_code == 200
     assert response.json()["status"] == "healthy"
     assert response.json()["model_loaded"] is True
 
 def test_02_predict_single_success():
-    """Test standard single customer payload handling at optimized threshold boundaries."""
+    #Test standard single customer payload handling at optimized threshold boundaries.
     payload = {
         "customer_id": "CUST_TEST_01",
         "recency": 12,
@@ -45,21 +45,21 @@ def test_02_predict_single_success():
     assert isinstance(data["risk_explanation"], str)
 
 def test_03_predict_validation_failure():
-    """Verify input filters block corrupt parameters (e.g., negative complaints count)."""
+    #Check if input filters block corrupt parameters
     corrupt_payload = {
         "customer_id": "CUST_ERR_01",
         "recency": 12,
         "frequency": 8,
         "monetary_value": 3500.0,
-        "support_complaints": -5,  # Invalid configuration bounds
+        "support_complaints": -5,  
         "web_interactions": 24
     }
     response = client.post("/predict", json=corrupt_payload)
-    assert response.status_code == 422  # Unprocessable Entity
+    assert response.status_code == 422  
     assert "detail" in response.json()
 
 def test_04_batch_prediction():
-    """Verify bulk array vectors process safely inside a single batch pass."""
+    #Check if bulk array vectors process safely inside a single batch pass.
     batch_payload = {
         "customers": [
             {"customer_id": "BCUST_1", "recency": 5, "frequency": 12, "monetary_value": 8200.0, "support_complaints": 0, "web_interactions": 45},
