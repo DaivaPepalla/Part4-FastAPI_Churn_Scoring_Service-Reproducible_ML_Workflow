@@ -23,7 +23,7 @@ RAW_MODEL_URL = "https://raw.githubusercontent.com/DaivaPepalla/Part3-Churn_Pred
 
 
 # =================================================================
-# 🔄 SELF-SUSTAINING LIFECYCLE EVENT HANDLER
+#  SELF-SUSTAINING LIFECYCLE EVENT HANDLER
 # =================================================================
 
 class CustomerFeatures(BaseModel):
@@ -47,7 +47,7 @@ class BatchPredictionResponse(BaseModel):
     predictions: List[PredictionResponse]
 
 # =================================================================
-# 🔄 LIFECYCLE EVENT HANDLER
+#  LIFECYCLE EVENT HANDLER
 # =================================================================
 @app.on_event("startup")
 def load_artifacts():
@@ -57,13 +57,12 @@ def load_artifacts():
         try:
             # Using urllib to download the binary stream cleanly without external dependencies like requests
             urllib.request.urlretrieve(RAW_MODEL_URL, MODEL_PATH)
-            print("✅ Successfully pulled and cached model.pkl from Part 3 GitHub!")
+            print(" Successfully pulled and cached model.pkl from Part 3 GitHub!")
         except Exception as e:
             raise RuntimeError(
-                f"❌ Critical Error: Failed to auto-download model.pkl from GitHub remote source. "
+                f" Critical Error: Failed to auto-download model.pkl from GitHub remote source. "
                 f"Please ensure the file is public in your Part 3 repository. Details: {e}"
             )
-    print("📖 Loading serialized model artifact into engine memory...")
     try:
         with open(MODEL_PATH, "rb") as f:
             artifacts = pickle.load(f)
@@ -75,9 +74,9 @@ def load_artifacts():
             else:
                 model = artifacts
                 scaler = None
-        print("🎯 Supervised model and normalization pipelines successfully loaded into memory!")
+        print(" Supervised model and normalization pipelines successfully loaded into memory!")
     except Exception as e:
-        raise RuntimeError(f"❌ Failed to parse or deserialize model file: {str(e)}")
+        raise RuntimeError(f" Failed to parse or deserialize model file: {str(e)}")
 
 def generate_risk_explanation(features: CustomerFeatures, prob: float) -> str:
     """Generates plain-English structural risk drivers for non-technical stakeholders."""
@@ -98,7 +97,7 @@ def generate_risk_explanation(features: CustomerFeatures, prob: float) -> str:
     return f"High Risk Cutoff Breached. Attrition driven primary by: {', '.join(reasons)}."
 
 # =================================================================
-# 🛣️ API ENDPOINT ROUTING MATRIX
+#  API ENDPOINT ROUTING MATRIX
 # =================================================================
 @app.get("/health", status_code=200)
 def health_check():
