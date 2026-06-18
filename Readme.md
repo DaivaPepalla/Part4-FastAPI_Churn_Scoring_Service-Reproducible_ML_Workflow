@@ -96,4 +96,4 @@ The application features a strict verification suite to intercept operational bu
 
 Schema Enforcement: Missing attributes or invalid metric tracking data formats immediately throw a localized 422 Unprocessable Entity response, safeguarding downstream model matrices from corruption.
 
-Version Isolation: Automatically blocks binary drift conflicts between training configurations and local server package layers.
+Version Isolation: Automatically blocks binary drift conflicts between training configurations and local server package layers..
