@@ -38,6 +38,8 @@ Ensure your local `site-packages` clean room matches the baseline runtime signat
 python -m pip install scikit-learn==1.4.1.post1 uvicorn fastapi pydantic requests
 3. Launching the Gateway Server
 Navigate to the root directory of your Part 4 workspace and initialize the Uvicorn engine:
+pip install --upgrade pip
+pip install -r requirements.txt
 # Using standard Windows CMD
 C:\Python310\python.exe -m uvicorn app.main:app --reload
 
