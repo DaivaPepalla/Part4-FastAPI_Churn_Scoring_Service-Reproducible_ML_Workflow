@@ -5,6 +5,7 @@ This repository contains the production-ready **FastAPI** microservice gateway f
 ---
 
 ## 🛠️ System Architecture
+```text
 D:\Capstone project\Part-4\
 ├── app/
 │   └── main.py
@@ -16,6 +17,7 @@ D:\Capstone project\Part-4\
 ├── monitoring_plan.md
 ├── README.md
 └── requirements.txt
+
 The gateway is built for high-throughput operational stability:
 * **Dynamic Artifact Resolution:** On startup, the service securely downloads the verified model pipeline binary (`model.pkl`) directly from the Part 3 cloud repository CDN, ensuring complete environmental synchronization.
 * **Strict Pydantic Contract Layer:** Input features are passed through explicit structural validation types to handle anomalies before they touch the predictive engine.
